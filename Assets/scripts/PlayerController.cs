@@ -7,34 +7,45 @@ public class Boundary
 	public float xMin, xMax, zMin, zMax;
 }
 
-public class PlayerController : MonoBehaviour
+
+public class PlayerController : MonoBehaviour 
 {
+	
 	public float speed;
 	public float tilt;
 	public Boundary boundary;
-	public Rigidbody rb;
 	
-	void Start(){
-		
-		rb = GetComponent<Rigidbody> ();     //The new shape to push an information from Rigidbody. I think.
-		
+	public GameObject shot;
+	public GameObject shotSpawn; 
+	public float fireRate;
+	
+	private float nextFire; 
+	
+	void Update () 
+	{
+		if (Input.GetButton("Fire1") && Time.time > nextFire) 
+		{
+			shot = Instantiate(shot) as GameObject;
+			nextFire = Time.time + fireRate;
+			//GameObject clone = 
+			shot.transform.position = shotSpawn.transform.position;
+			
+		}
 	}
-	
 	void FixedUpdate ()
 	{
+		
 		float moveHorizontal = Input.GetAxis ("Horizontal");
 		float moveVertical = Input.GetAxis ("Vertical");
 		
 		Vector3 movement = new Vector3 (moveHorizontal, 0.0f, moveVertical);
-		rb.velocity = movement * speed;
+		GetComponent<Rigidbody>().velocity = movement * speed;
 		
-		rb.position = new Vector3 
+		GetComponent<Rigidbody>().position = new Vector3
 			(
-				Mathf.Clamp (rb.position.x, boundary.xMin, boundary.xMax), 
-				0.0f, 
-				Mathf.Clamp (rb.position.z, boundary.zMin, boundary.zMax)
+				Mathf.Clamp (GetComponent<Rigidbody>().position.x, boundary.xMin, boundary.xMax), 0.0f, Mathf.Clamp (GetComponent<Rigidbody>().position.z, boundary.zMin, boundary.zMax)
 				);
-		
-		rb.rotation = Quaternion.Euler (0.0f, 0.0f, rb.velocity.x * -tilt);
+		GetComponent<Rigidbody>().rotation = Quaternion.Euler (0.0f, 0.0f, GetComponent<Rigidbody>().velocity.x * -tilt);
 	}
+	
 }﻿
