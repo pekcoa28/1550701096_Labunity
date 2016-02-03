@@ -2,13 +2,14 @@
 using System.Collections;
 
 public class DestroyByContact : MonoBehaviour {
+
+	// Use this for initialization
+	void Start () {
 	
-	void OnTriggerEnter(Collider other){
-		if (other.tag == "Boundary") {
-			return;
-		}
-		Destroy (other.gameObject);
-		Destroy (gameObject);
 	}
 	
-}﻿
+	// Update is called once per frame
+	void Update () {
+	
+	}
+}
