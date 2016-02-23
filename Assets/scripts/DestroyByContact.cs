@@ -6,7 +6,7 @@ public class DestroyByContact : MonoBehaviour
 	public GameObject explosion;
 	public GameObject playerExplosion;
 
-	void OnTriggerEnter(Collider other) 
+	void OnTriggerEnter(Collider other)
 	{
 		if (other.tag == "Boundary")
 		{
