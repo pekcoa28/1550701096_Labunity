@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class DestroyByContact : MonoBehaviour
-{
+public class DestroyByContact : MonoBehaviour {
+
 	public GameObject explosion;
 	public GameObject playerExplosion;
 	public int scoreValue;
@@ -21,19 +21,19 @@ public class DestroyByContact : MonoBehaviour
 		}
 	}
 
-	void OnTriggerEnter(Collider other)
-	{
-		if (other.tag == "Boundary")
-		{
+	void OnTriggerEnter(Collider other){
+		if (other.tag == "Boundary") {
 			return;
 		}
-		Instantiate(explosion, transform.position, transform.rotation);
-		if (other.tag == "Player")
-		{
-			Instantiate(playerExplosion, other.transform.position, other.transform.rotation);
+
+		Instantiate (explosion, transform.position, transform.rotation);
+		if (other.tag == "Player") {
+
+			Instantiate (playerExplosion, other.transform.position, other.transform.rotation);
+			gameController.GameOver ();
 		}
 		gameController.AddScore (scoreValue);
-		Destroy(other.gameObject);
-		Destroy(gameObject);
+		Destroy (other.gameObject);
+		Destroy (gameObject);
 	}
 }
